@@ -4,7 +4,7 @@ require('dotenv').load();
 
 const server = new Hapi.Server();
 server.connection({
-    port: process.env.PORT || 8000
+    port: process.env.PORT
 });
 
 server.register(require('inert'), (err) => {
@@ -15,7 +15,7 @@ server.register(require('inert'), (err) => {
 
     server.route({
         method: 'GET',
-        path: '/hello',
+        path: '/',
         handler: (request, reply) => {
             reply.file('./public/index.html');
         }
