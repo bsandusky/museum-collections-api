@@ -1,46 +1,24 @@
-'use strict';
-const Hapi = require('hapi');
-require('dotenv').load();
+'use strict'
 
-const server = new Hapi.Server();
-server.connection({
-    port: process.env.PORT
-});
+const express = require('express')
+const app = express()
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
+const routes = require('./app/routes/index.js')
 
-server.register(require('inert'), (err) => {
+require('dotenv').load()
 
-    if (err) {
-        throw err;
-    }
+app.use('/controllers', express.static(process.cwd() + '/app/controllers'))
+app.use('/public', express.static(process.cwd() + '/public'))
 
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: (request, reply) => {
-            reply.file('./public/index.html');
-        }
-    });
-});
+routes(app)
 
-server.route({
-  method: 'GET',
-  path: '/api/search/',
-  handler: (request, reply) => {
+io.on('connection', (client) => {
+  console.log("Server received client connection")
+  client.on('join', (data) => { console.log(data) })
 
-    if (request.query.q) {
+})
 
-
-    } else {
-
-    }
-    reply({done: "search completed"})
-  }
-});
-
-server.start((err) => {
-
-    if (err) {
-        throw err;
-    }
-    console.log('Server running at:', server.info.uri);
-});
+server.listen(process.env.PORT, () => {
+  console.log("Server running at port " + process.env.PORT)
+})

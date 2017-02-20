@@ -9,9 +9,10 @@
   "author": "bsandusky",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^16.1.0",
+    "express": "^4.14.1",
     "inert": "^4.1.0",
-    "mongodb": "^2.2.22"
+    "mongodb": "^2.2.22",
+    "socket.io": "^1.7.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
