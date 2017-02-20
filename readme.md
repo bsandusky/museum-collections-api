@@ -3,7 +3,8 @@
 Stack
 - Ubuntu on Vagrant
 - Node
-- Hapi
+- Express
+- Socket.io
 - Mongo
 - Mocha
 - Chai

@@ -16,7 +16,6 @@ routes(app)
 io.on('connection', (client) => {
   console.log("Server received client connection")
   client.on('join', (data) => { console.log(data) })
-
 })
 
 server.listen(process.env.PORT, () => {
